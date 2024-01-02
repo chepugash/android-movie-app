@@ -72,7 +72,7 @@ dependencies {
 }
 
 tasks.withType<Detekt>().configureEach {
-//    source = files("${project.projectDir}/src")
+//    source = files("${project.projectDir}")
     config = files("${project.rootDir}/config/detekt/detekt.yml")
     parallel = true
 }
