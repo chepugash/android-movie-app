@@ -43,4 +43,3 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 [bundles]
-

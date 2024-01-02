@@ -4,6 +4,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -72,7 +73,7 @@ dependencies {
 }
 
 tasks.withType<Detekt>().configureEach {
-    source = files("src/main/kotlin", "src/test/kotlin").asFileTree
+    source = files("$projectDir").asFileTree
     config = files("${project.rootDir}/config/detekt/detekt.yml")
     parallel = true
 }
