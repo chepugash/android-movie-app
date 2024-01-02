@@ -72,7 +72,7 @@ dependencies {
 }
 
 tasks.withType<Detekt>().configureEach {
-//    source = files("${project.projectDir}")
+    source = files("src/main/kotlin", "src/test/kotlin").asFileTree
     config = files("${project.rootDir}/config/detekt/detekt.yml")
     parallel = true
 }
