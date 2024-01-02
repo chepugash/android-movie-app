@@ -1,3 +1,5 @@
+import io.gitlab.arturbosch.detekt.Detekt
+
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.androidApplication)
@@ -67,4 +69,10 @@ dependencies {
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
+}
+
+tasks.withType<Detekt>().configureEach {
+//    source = files("${project.projectDir}/src")
+    config = files("${project.rootDir}/config/detekt/detekt.yml")
+    parallel = true
 }
