@@ -33,9 +33,9 @@ android {
 
 dependencies {
 
-    implementation(":core:common")
-    implementation(":core:widget")
-    implementation(":feature:detail-api")
+    implementation(project(":core:common"))
+    implementation(project(":core:widget"))
+    implementation(project(":feature:detail-api"))
 
     implementation(libs.core.ktx)
     implementation(libs.androidx.appcompat)
