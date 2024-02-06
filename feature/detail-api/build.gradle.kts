@@ -35,10 +35,6 @@ android {
 dependencies {
 
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.okhttp)
-    implementation(libs.okhttp.log)
-    implementation(libs.retrofit.core)
-    implementation(libs.retrofit.kotlinx.serialization)
     implementation(libs.kotlinx.collections.immutable)
 
     implementation(libs.core.ktx)
