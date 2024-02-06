@@ -52,7 +52,6 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
 
-
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.okhttp)
     implementation(libs.okhttp.log)
