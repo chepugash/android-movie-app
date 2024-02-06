@@ -1,4 +1,4 @@
-package com.practice.movie
+package com.practice.movie.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

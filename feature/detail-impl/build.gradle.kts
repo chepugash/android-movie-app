@@ -33,6 +33,10 @@ android {
 
 dependencies {
 
+    implementation(":core:common")
+    implementation(":core:widget")
+    implementation(":feature:detail-api")
+
     implementation(libs.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
