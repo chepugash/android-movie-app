@@ -4,7 +4,7 @@ import com.practice.feature.detail_api.model.CountryEntity
 import com.practice.feature.detail_api.model.DetailFilmEntity
 import com.practice.feature.detail_api.model.GenreEntity
 
-class DetailResponseToDetailEntityMapper {
+object DetailResponseToDetailEntityMapper {
 
     operator fun invoke(response: DetailResponseEntity): DetailFilmEntity {
         return DetailFilmEntity(

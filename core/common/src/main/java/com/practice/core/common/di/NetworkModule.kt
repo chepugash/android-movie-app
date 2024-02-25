@@ -50,7 +50,10 @@ val networkModule = module {
     }
 
     single {
-        Json.asConverterFactory(CONTENT_TYPE.toMediaType())
+        val json = Json {
+            ignoreUnknownKeys = true
+        }
+        json.asConverterFactory(CONTENT_TYPE.toMediaType())
     }
 
     single<OkHttpClient> {

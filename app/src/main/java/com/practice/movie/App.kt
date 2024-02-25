@@ -2,6 +2,7 @@ package com.practice.movie
 
 import android.app.Application
 import com.practice.core.common.di.networkModule
+import com.practice.feature.detail.di.detailModule
 import com.practice.movie.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -19,6 +20,7 @@ class App : Application() {
             modules(
                 appModule,
                 networkModule,
+                detailModule
             )
         }
     }

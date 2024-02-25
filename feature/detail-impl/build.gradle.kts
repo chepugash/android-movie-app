@@ -23,6 +23,12 @@ android {
             )
         }
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -36,14 +42,30 @@ dependencies {
 
     implementation(project(":core:common"))
     implementation(project(":core:widget"))
+    implementation(project(":core:designsystem"))
     implementation(project(":feature:detail-api"))
+
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.activity.compose)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.ui)
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.tooling.preview)
+    debugImplementation(libs.ui.tooling)
+    implementation(libs.material3)
+
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     implementation(libs.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
-    implementation(libs.koin.android)
     implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.android.compose)
+
+    implementation(libs.coil)
 
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.collections.immutable)

@@ -68,6 +68,8 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
 
+    implementation(libs.navigation.compose)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -77,6 +79,7 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
 
     implementation(project(":core:common"))
+    implementation(project(":core:designsystem"))
     implementation(project(":feature:auth-impl"))
     implementation(project(":feature:detail-impl"))
     implementation(project(":feature:favorite-impl"))

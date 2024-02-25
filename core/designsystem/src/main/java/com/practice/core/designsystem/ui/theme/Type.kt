@@ -1,4 +1,4 @@
-package com.practice.movie.ui.theme
+package com.practice.core.designsystem.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -14,14 +14,20 @@ val Typography = Typography(
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
+    ),
     titleLarge = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
+        fontWeight = FontWeight.Bold,
+        fontSize = 32.sp,
+        lineHeight = 38.sp,
+        letterSpacing = 0.sp,
+    ),
+    titleMedium = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.sp,
     ),
     labelSmall = TextStyle(
         fontFamily = FontFamily.Default,
@@ -29,6 +35,12 @@ val Typography = Typography(
         fontSize = 11.sp,
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp
+    ),
+    labelMedium = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
     )
-    */
 )
