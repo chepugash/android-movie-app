@@ -9,6 +9,8 @@ import androidx.navigation.navArgument
 import com.practice.feature.detail.presentation.DetailScreen
 
 private const val ID = "ID"
+private const val DEFAULT_INT_ARG = -1
+private const val ID_HARDCODED = 944098
 
 @Composable
 fun Navigation() {
@@ -25,13 +27,13 @@ fun Navigation() {
             arguments = listOf(
                 navArgument(ID) {
                     type = NavType.IntType
-                    defaultValue = -1
+                    defaultValue = DEFAULT_INT_ARG
                     nullable = false
                 }
             )
         ) { entry ->
             entry.arguments?.getInt(ID)?.let {
-                DetailScreen(filmId = 944098, navController = navController)
+                DetailScreen(filmId = ID_HARDCODED, navController = navController)
             }
         }
     }

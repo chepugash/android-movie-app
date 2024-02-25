@@ -82,27 +82,21 @@ private const val TOOLBAR_ANIMATION_TIMING = 200
 
 @Composable
 fun DetailScreen(
-    filmId: Int,
-    navController: NavController,
-    viewModel: DetailViewModel = koinViewModel()
+    filmId: Int, navController: NavController, viewModel: DetailViewModel = koinViewModel()
 ) {
 
     val state = viewModel.state.collectAsStateWithLifecycle()
     val effect by viewModel.effect.collectAsStateWithLifecycle(null)
 
-    DetailContent(
-        filmId = filmId,
+    DetailContent(filmId = filmId,
         state = state.value,
-        eventHandler = remember { viewModel::event }
-    )
+        eventHandler = remember { viewModel::event })
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnusedBoxWithConstraintsScope")
 @Composable
 private fun DetailContent(
-    filmId: Int,
-    state: DetailState,
-    eventHandler: (DetailEvent) -> Unit
+    filmId: Int, state: DetailState, eventHandler: (DetailEvent) -> Unit
 ) {
 
     LaunchedEffect(Unit) {
@@ -120,26 +114,21 @@ private fun DetailContent(
     val toolbarHeightPx = with(LocalDensity.current) { toolbarHeight.toPx() }
 
     if (film != null) {
-        Scaffold(
-            topBar = {
-                CollapsingToolbar(
-                    scroll = scroll,
-                    headerHeightPx = headerHeightPx,
-                    toolbarHeightPx = toolbarHeightPx,
-                    title = film.nameRu ?: ""
-                )
-            }
-        ) {
+        Scaffold(topBar = {
+            CollapsingToolbar(
+                scroll = scroll,
+                headerHeightPx = headerHeightPx,
+                toolbarHeightPx = toolbarHeightPx,
+                title = film.nameRu ?: ""
+            )
+        }) {
 
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
+                modifier = Modifier.fillMaxSize()
             ) {
 
                 DetailPoster(
-                    scroll = scroll,
-                    height = headerHeightPx,
-                    posterUrl = film.posterUrl ?: ""
+                    scroll = scroll, height = headerHeightPx, posterUrl = film.posterUrl ?: ""
                 )
 
                 Column(
@@ -156,8 +145,7 @@ private fun DetailContent(
 
                     if (film.ratingImdb != null && film.ratingKinopoisk != null) {
                         DetailRating(
-                            ratingImdb = film.ratingImdb,
-                            ratingKinopoisk = film.ratingKinopoisk
+                            ratingImdb = film.ratingImdb, ratingKinopoisk = film.ratingKinopoisk
                         )
                         Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.step1)))
                     }
@@ -223,10 +211,7 @@ private fun DetailContent(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CollapsingToolbar(
-    title: String,
-    scroll: ScrollState,
-    headerHeightPx: Float,
-    toolbarHeightPx: Float
+    title: String, scroll: ScrollState, headerHeightPx: Float, toolbarHeightPx: Float
 ) {
     val toolbarBottom by remember {
         mutableFloatStateOf(headerHeightPx - toolbarHeightPx)
@@ -239,43 +224,37 @@ fun CollapsingToolbar(
     }
 
     AnimatedVisibility(
-        visible = showToolbar,
-        enter = slideInVertically(
+        visible = showToolbar, enter = slideInVertically(
             animationSpec = tween(TOOLBAR_ANIMATION_TIMING, easing = LinearEasing)
-        ),
-        exit = slideOutVertically(
+        ), exit = slideOutVertically(
             animationSpec = tween(TOOLBAR_ANIMATION_TIMING, easing = LinearEasing)
         )
     ) {
-        TopAppBar(
-            title = {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleMedium,
-                    maxLines = 1,
-                )
-            },
-            navigationIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_back),
-                    contentDescription = "back icon in details",
-                    modifier = Modifier
-                        .padding(dimensionResource(id = R.dimen.step1))
-                        .size(dimensionResource(id = R.dimen.step7))
-                )
-            },
-            actions = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_favorite),
-                    contentDescription = "favorite icon in details",
-                    modifier = Modifier
-                        .padding(dimensionResource(id = R.dimen.step1))
-                        .size(dimensionResource(id = R.dimen.step7))
-                )
-            },
-            colors = TopAppBarDefaults.mediumTopAppBarColors(
-                containerColor = MaterialTheme.colorScheme.surface
+        TopAppBar(title = {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleMedium,
+                maxLines = 1,
             )
+        }, navigationIcon = {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_back),
+                contentDescription = "back icon in details",
+                modifier = Modifier
+                    .padding(dimensionResource(id = R.dimen.step1))
+                    .size(dimensionResource(id = R.dimen.step7))
+            )
+        }, actions = {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_favorite),
+                contentDescription = "favorite icon in details",
+                modifier = Modifier
+                    .padding(dimensionResource(id = R.dimen.step1))
+                    .size(dimensionResource(id = R.dimen.step7))
+            )
+        }, colors = TopAppBarDefaults.mediumTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        )
         )
     }
     AnimatedVisibility(
@@ -283,33 +262,29 @@ fun CollapsingToolbar(
         enter = fadeIn(animationSpec = tween(NO_TOOLBAR_ANIMATION_TIMING)),
         exit = fadeOut(animationSpec = tween(NO_TOOLBAR_ANIMATION_TIMING))
     ) {
-        TopAppBar(
-            title = {},
-            navigationIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_back),
-                    contentDescription = "back icon in details",
-                    tint = Color.White,
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .background(toolbarBackgroundButton)
-                        .padding(dimensionResource(id = R.dimen.step1))
-                        .size(dimensionResource(id = R.dimen.step7))
-                )
-            },
-            actions = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_favorite),
-                    contentDescription = "favorite icon in details",
-                    tint = Color.White,
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .background(toolbarBackgroundButton)
-                        .padding(dimensionResource(id = R.dimen.step1))
-                        .size(dimensionResource(id = R.dimen.step7))
-                )
-            },
-            colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = Color.Transparent)
+        TopAppBar(title = {}, navigationIcon = {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_back),
+                contentDescription = "back icon in details",
+                tint = Color.White,
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(toolbarBackgroundButton)
+                    .padding(dimensionResource(id = R.dimen.step1))
+                    .size(dimensionResource(id = R.dimen.step7))
+            )
+        }, actions = {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_favorite),
+                contentDescription = "favorite icon in details",
+                tint = Color.White,
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(toolbarBackgroundButton)
+                    .padding(dimensionResource(id = R.dimen.step1))
+                    .size(dimensionResource(id = R.dimen.step7))
+            )
+        }, colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = Color.Transparent)
         )
     }
 }
@@ -317,20 +292,15 @@ fun CollapsingToolbar(
 
 @Composable
 fun DetailPoster(
-    scroll: ScrollState,
-    height: Float,
-    posterUrl: String
+    scroll: ScrollState, height: Float, posterUrl: String
 ) {
-    Box(
-        modifier = Modifier
-            .graphicsLayer {
-                translationY = -scroll.value.toFloat() / 1.5f
-                alpha = (-1f / height) * scroll.value + 1
-            }
-            .height(dimensionResource(id = R.dimen.detail_poster))
-    ) {
-        SubcomposeAsyncImage(
-            model = posterUrl,
+    Box(modifier = Modifier
+        .graphicsLayer {
+            translationY = -scroll.value.toFloat() / 1.5f
+            alpha = (-1f / height) * scroll.value + 1
+        }
+        .height(dimensionResource(id = R.dimen.detail_poster))) {
+        SubcomposeAsyncImage(model = posterUrl,
             contentDescription = "poster in details",
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
@@ -339,21 +309,15 @@ fun DetailPoster(
                 .graphicsLayer(compositingStrategy = CompositingStrategy.Offscreen)
                 .drawWithContent {
                     val colors = listOf(
-                        Color.Black,
-                        Color.Black,
-                        Color.Transparent
+                        Color.Black, Color.Black, Color.Transparent
                     )
                     drawContent()
                     drawRect(
-                        brush = Brush.verticalGradient(colors),
-                        blendMode = BlendMode.DstAtop
+                        brush = Brush.verticalGradient(colors), blendMode = BlendMode.DstAtop
                     )
-                }
-        ) {
+                }) {
             val state = painter.state
-            if (state is AsyncImagePainter.State.Loading
-                || state is AsyncImagePainter.State.Error
-            ) {
+            if (state is AsyncImagePainter.State.Loading || state is AsyncImagePainter.State.Error) {
 
             } else {
                 SubcomposeAsyncImageContent()
@@ -364,12 +328,10 @@ fun DetailPoster(
 
 @Composable
 fun DetailRating(
-    ratingImdb: Double,
-    ratingKinopoisk: Double
+    ratingImdb: Double, ratingKinopoisk: Double
 ) {
     Row(
-        modifier = Modifier
-            .horizontalScroll(rememberScrollState())
+        modifier = Modifier.horizontalScroll(rememberScrollState())
     ) {
         Card(
             colors = CardDefaults.cardColors(containerColor = imdbBrandColor)
@@ -399,9 +361,7 @@ fun DetailRating(
 
 @Composable
 fun DetailTitle(
-    name: String,
-    originalName: String,
-    year: String
+    name: String, originalName: String, year: String
 ) {
     Column {
         Text(
@@ -503,8 +463,7 @@ private fun DetailPreview() {
     MovieTheme {
         // A surface container using the 'background' color from the theme
         Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
+            modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
         ) {
             CircularProgressIndicator()
         }
