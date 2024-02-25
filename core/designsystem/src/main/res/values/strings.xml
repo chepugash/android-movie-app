@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Movie</string>
+    <string name="detail_pegi_prefix">Возрастное ограничение: %1$s</string>
+    <string name="detail_length_prefix">Длительность: %1$s</string>
+    <string name="detail_country_prefix">Страна: %1$s</string>
+    <string name="detail_country_separator">", "</string>
+    <string name="detail_rating_kinopoisk_prefix">Кинопоиск %1$s</string>
+    <string name="detail_rating_imdb_prefix">IMDB %1$s</string>
+    <string name="detail_button_watch">Смотреть</string>
+</resources>
