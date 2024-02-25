@@ -14,9 +14,7 @@ class DetailRepositoryImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : DetailRepository {
 
-    override suspend fun getFilmById(id: Int): DetailFilmEntity {
-        return withContext(dispatcher) {
-            responseMapper(api.getFilmById(id))
-        }
+    override suspend fun getFilmById(id: Int): DetailFilmEntity = withContext(dispatcher) {
+        responseMapper(api.getFilmById(id))
     }
 }

@@ -6,24 +6,31 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.practice.core.common.navigation.DestinationScreen
 import com.practice.feature.detail.presentation.DetailScreen
+import com.practice.feature.home_impl.presentation.HomeScreen
 
 private const val ID = "ID"
 private const val DEFAULT_INT_ARG = -1
-private const val ID_HARDCODED = 944_098
 
 @Composable
 fun Navigation() {
 
     val navController = rememberNavController()
-    
+
     NavHost(
         navController = navController,
-        startDestination = DestinationScreen.DetailScreen.route,
+        startDestination = DestinationScreen.HomeScreen.route,
     ) {
 
         composable(
-            route = DestinationScreen.DetailScreen.route,
+            route = DestinationScreen.HomeScreen.route
+        ) {
+            HomeScreen(navController = navController)
+        }
+
+        composable(
+            route = DestinationScreen.DetailScreen.route + "/{$ID}",
             arguments = listOf(
                 navArgument(ID) {
                     type = NavType.IntType
@@ -33,7 +40,7 @@ fun Navigation() {
             )
         ) { entry ->
             entry.arguments?.getInt(ID)?.let {
-                DetailScreen(filmId = ID_HARDCODED, navController = navController)
+                DetailScreen(filmId = it, navController = navController)
             }
         }
     }
