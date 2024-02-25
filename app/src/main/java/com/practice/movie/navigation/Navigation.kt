@@ -10,7 +10,7 @@ import com.practice.feature.detail.presentation.DetailScreen
 
 private const val ID = "ID"
 private const val DEFAULT_INT_ARG = -1
-private const val ID_HARDCODED = 944098
+private const val ID_HARDCODED = 944_098
 
 @Composable
 fun Navigation() {

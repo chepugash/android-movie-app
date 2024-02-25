@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.practice.core.designsystem.ui.theme.MovieTheme
-import com.practice.feature.detail.presentation.DetailScreen
 import com.practice.movie.navigation.Navigation
 
 class MainActivity : ComponentActivity() {
