@@ -68,6 +68,7 @@ import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import com.practice.core.designsystem.R
 import com.practice.core.designsystem.ui.theme.MovieTheme
+import com.practice.core.designsystem.ui.theme.black33Transparent
 import com.practice.core.designsystem.ui.theme.imdbBrandColor
 import com.practice.core.designsystem.ui.theme.kinopoiskBrandColor
 import com.practice.core.designsystem.ui.theme.toolbarBackgroundButton
@@ -82,21 +83,27 @@ private const val TOOLBAR_ANIMATION_TIMING = 200
 
 @Composable
 fun DetailScreen(
-    filmId: Int, navController: NavController, viewModel: DetailViewModel = koinViewModel()
+    filmId: Int,
+    navController: NavController,
+    viewModel: DetailViewModel = koinViewModel()
 ) {
 
     val state = viewModel.state.collectAsStateWithLifecycle()
     val effect by viewModel.effect.collectAsStateWithLifecycle(null)
 
-    DetailContent(filmId = filmId,
+    DetailContent(
+        filmId = filmId,
         state = state.value,
-        eventHandler = remember { viewModel::event })
+        eventHandler = remember { viewModel::event }
+    )
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnusedBoxWithConstraintsScope")
 @Composable
 private fun DetailContent(
-    filmId: Int, state: DetailState, eventHandler: (DetailEvent) -> Unit
+    filmId: Int,
+    state: DetailState,
+    eventHandler: (DetailEvent) -> Unit
 ) {
 
     LaunchedEffect(Unit) {
@@ -292,7 +299,9 @@ fun CollapsingToolbar(
 
 @Composable
 fun DetailPoster(
-    scroll: ScrollState, height: Float, posterUrl: String
+    scroll: ScrollState,
+    height: Float,
+    posterUrl: String
 ) {
     Box(modifier = Modifier
         .graphicsLayer {
@@ -300,7 +309,8 @@ fun DetailPoster(
             alpha = (-1f / height) * scroll.value + 1
         }
         .height(dimensionResource(id = R.dimen.detail_poster))) {
-        SubcomposeAsyncImage(model = posterUrl,
+        SubcomposeAsyncImage(
+            model = posterUrl,
             contentDescription = "poster in details",
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
@@ -318,7 +328,11 @@ fun DetailPoster(
                 }) {
             val state = painter.state
             if (state is AsyncImagePainter.State.Loading || state is AsyncImagePainter.State.Error) {
-
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(color = black33Transparent)
+                )
             } else {
                 SubcomposeAsyncImageContent()
             }

@@ -1,9 +1,7 @@
 package com.practice.feature.detail.presentation.mvi
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.practice.feature.detail.data.datasource.remote.DetailResponseToDetailEntityMapper
 import com.practice.feature.detail.presentation.mapper.DetailEntityToDetailPresentationMapper
 import com.practice.feature.detail_api.usecase.GetFilmByIdUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -55,7 +53,7 @@ class DetailViewModel(
                     )
                     _state.emit(newState)
                 },
-                onFailure = {  }
+                onFailure = { }
             )
         }
     }
