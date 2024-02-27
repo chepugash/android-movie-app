@@ -2,10 +2,14 @@ package com.practice.feature.home_impl.di
 
 import com.practice.feature.home_api.repository.HomeRepository
 import com.practice.feature.home_api.usecase.GetFilmsUseCase
+import com.practice.feature.home_api.usecase.GetUserUseCase
+import com.practice.feature.home_api.usecase.SignOutUseCase
 import com.practice.feature.home_impl.data.HomeRepositoryImpl
 import com.practice.feature.home_impl.data.datasource.remote.HomeApi
 import com.practice.feature.home_impl.data.datasource.remote.HomeResponseToHomeEntityMapper
 import com.practice.feature.home_impl.domain.usecase.GetFilmsUseCaseImpl
+import com.practice.feature.home_impl.domain.usecase.GetUserUseCaseImpl
+import com.practice.feature.home_impl.domain.usecase.SignOutUseCaseImpl
 import com.practice.feature.home_impl.presentation.mapper.HomeEntityToHomePresentationMapper
 import com.practice.feature.home_impl.presentation.mvi.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -39,6 +43,18 @@ val homeModule = module {
 
     factory<GetFilmsUseCase> {
         GetFilmsUseCaseImpl(
+            repository = get()
+        )
+    }
+
+    factory<GetUserUseCase> {
+        GetUserUseCaseImpl(
+            repository = get()
+        )
+    }
+
+    factory<SignOutUseCase> {
+        SignOutUseCaseImpl(
             repository = get()
         )
     }
