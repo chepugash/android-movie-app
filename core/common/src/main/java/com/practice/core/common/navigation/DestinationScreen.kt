@@ -6,6 +6,10 @@ sealed class DestinationScreen(val route: String) {
 
     object HomeScreen : DestinationScreen(route = HOME_ROUTE)
 
+    object SignInScreen : DestinationScreen(route = SIGN_IN_ROUTE)
+
+    object ConfirmScreen : DestinationScreen(route = CONFIRM_ROUTE)
+
     fun withArgs(vararg args: String): String {
         return buildString {
             append(route)
@@ -19,5 +23,7 @@ sealed class DestinationScreen(val route: String) {
 
         private const val DETAIL_ROUTE = "detail_screen"
         private const val HOME_ROUTE = "home_screen"
+        private const val SIGN_IN_ROUTE = "sign_in_screen"
+        private const val CONFIRM_ROUTE = "confirm_route"
     }
 }

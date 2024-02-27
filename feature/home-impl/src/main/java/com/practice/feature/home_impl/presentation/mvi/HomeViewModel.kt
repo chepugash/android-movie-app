@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.practice.feature.home_api.usecase.GetFilmsUseCase
+import com.practice.feature.home_api.usecase.GetUserUseCase
+import com.practice.feature.home_api.usecase.SignOutUseCase
 import com.practice.feature.home_impl.presentation.mapper.HomeEntityToHomePresentationMapper
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +17,8 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getFilmsUseCase: GetFilmsUseCase,
+    private val getUserUseCase: GetUserUseCase,
+    private val signOutUseCase: SignOutUseCase,
     private val mapper: HomeEntityToHomePresentationMapper,
 ) : ViewModel() {
 
@@ -30,11 +34,39 @@ class HomeViewModel(
         when (homeEvent) {
             is HomeEvent.OnFilmClick -> onFilmClick(homeEvent.id)
             HomeEvent.OnProfileClick -> onProfileClick()
+            HomeEvent.OnBackCLick -> onBackClick()
+            is HomeEvent.OnSignOut -> onSignOut(homeEvent.phone)
+        }
+    }
+
+    private fun onSignOut(phone: String) {
+        viewModelScope.launch {
+            try {
+                signOutUseCase(phone)
+                _effect.emit(HomeEffect.NavigateBack)
+            } catch (e: Throwable) {
+                _state.emit(_state.value.copy(error = e.message))
+            }
         }
     }
 
     init {
+        getUser()
         loadFilms()
+    }
+
+    private fun getUser() {
+        viewModelScope.launch {
+            _state.emit(_state.value.copy(userPhone = getUserUseCase()))
+        }
+    }
+
+    private fun onBackClick() {
+        viewModelScope.launch {
+            _effect.emit(
+                HomeEffect.NavigateBack
+            )
+        }
     }
 
     private fun onProfileClick() {

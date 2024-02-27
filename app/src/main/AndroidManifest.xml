@@ -19,7 +19,9 @@
             android:name=".ui.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Movie">
+            android:theme="@style/Theme.Movie"
+            android:screenOrientation="locked"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

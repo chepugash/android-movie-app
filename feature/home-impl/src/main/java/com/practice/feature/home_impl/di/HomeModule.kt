@@ -17,6 +17,8 @@ val homeModule = module {
     viewModel<HomeViewModel> {
         HomeViewModel(
             getFilmsUseCase = get(),
+            getUserUseCase = get(),
+            signOutUseCase = get(),
             mapper = get(),
         )
     }
@@ -30,6 +32,7 @@ val homeModule = module {
     single<HomeRepository> {
         HomeRepositoryImpl(
             api = get(),
+            dao = get(),
             responseMapper = get()
         )
     }
@@ -40,12 +43,12 @@ val homeModule = module {
         )
     }
 
-    factory<HomeResponseToHomeEntityMapper> {
-        HomeResponseToHomeEntityMapper
+    single<HomeResponseToHomeEntityMapper> {
+        HomeResponseToHomeEntityMapper()
     }
 
-    factory<HomeEntityToHomePresentationMapper> {
-        HomeEntityToHomePresentationMapper
+    single<HomeEntityToHomePresentationMapper> {
+        HomeEntityToHomePresentationMapper()
     }
 }
 
