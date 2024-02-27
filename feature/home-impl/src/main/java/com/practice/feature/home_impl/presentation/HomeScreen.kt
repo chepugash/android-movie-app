@@ -1,9 +1,12 @@
 package com.practice.feature.home_impl.presentation
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,16 +16,19 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -58,6 +64,10 @@ fun HomeScreen(
         navController = navController,
         effect = effect
     )
+
+    BackHandler {
+        viewModel::event.invoke(HomeEvent.OnBackCLick)
+    }
 }
 
 @Composable
@@ -76,6 +86,13 @@ private fun HomeScreenEffect(
                 )
             }
 
+            HomeEffect.NavigateBack -> {
+                navController.popBackStack(
+                    route = DestinationScreen.SignInScreen.route,
+                    inclusive = false
+                )
+            }
+
             HomeEffect.NavigateToProfile -> {}
         }
     }
@@ -89,36 +106,59 @@ private fun HomeContent(
 
     val films = state.films
 
-    if (films != null) {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(dimensionResource(id = R.dimen.step2))
-        ) {
-            items(films) { film ->
-                Column(
-                    modifier = Modifier
-                        .wrapContentSize()
-                        .clip(RoundedCornerShape(percent = 12))
-                        .clickable {
-                            eventHandler(HomeEvent.OnFilmClick(film.kinopoiskId))
-                        }
-                        .padding(dimensionResource(id = R.dimen.step4))
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .width(160.dp)
-                            .height(240.dp)
-                            .clip(RoundedCornerShape(percent = 12))
-                    ) {
-                        HomePoster(posterUrl = film.posterUrlPreview)
+    Column(modifier = Modifier.fillMaxSize()) {
+        if (state.userPhone != null) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .clickable {
+                        eventHandler(HomeEvent.OnSignOut(state.userPhone))
+                        eventHandler(HomeEvent.OnBackCLick)
                     }
-                    HomeTitle(
-                        nameRu = film.nameRu,
-                        nameOriginal = film.nameOriginal,
-                        year = film.year
-                    )
+                    .padding(dimensionResource(id = R.dimen.step4))
+            ) {
+                Text(
+                    text = state.userPhone,
+                    style = MaterialTheme.typography.labelSmall,
+                    modifier = Modifier.padding(end = dimensionResource(id = R.dimen.step2))
+                )
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_signout),
+                    contentDescription = null
+                )
+            }
+        }
+        if (films != null) {
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(dimensionResource(id = R.dimen.step2))
+            ) {
+                items(films) { film ->
+                    Column(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .clip(RoundedCornerShape(percent = 12))
+                            .clickable {
+                                eventHandler(HomeEvent.OnFilmClick(film.kinopoiskId))
+                            }
+                            .padding(dimensionResource(id = R.dimen.step4))
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .width(160.dp)
+                                .height(240.dp)
+                                .clip(RoundedCornerShape(percent = 12))
+                        ) {
+                            HomePoster(posterUrl = film.posterUrlPreview)
+                        }
+                        HomeTitle(
+                            nameRu = film.nameRu,
+                            nameOriginal = film.nameOriginal,
+                            year = film.year
+                        )
+                    }
                 }
             }
         }

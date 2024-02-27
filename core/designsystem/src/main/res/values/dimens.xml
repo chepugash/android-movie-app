@@ -6,8 +6,11 @@
     <dimen name="step4">16.dp</dimen>
     <dimen name="step7">28.dp</dimen>
     <dimen name="step9">36.dp</dimen>
+    <dimen name="step10"></dimen>
 
     <dimen name="toolbar_height">56.dp</dimen>
-
     <dimen name="detail_poster">440.dp</dimen>
+
+    <dimen name="round_shape">18.dp</dimen>
+    <dimen name="tf_border_width">2.dp</dimen>
 </resources>

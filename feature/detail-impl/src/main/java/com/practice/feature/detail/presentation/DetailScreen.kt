@@ -10,9 +10,9 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -26,7 +26,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -45,7 +44,6 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
@@ -173,6 +171,8 @@ private fun DetailContent(
                         Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.step1)))
                     }
 
+                    Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.step1)))
+
                     DetailDescription(description = film.description)
 
                     Divider(
@@ -193,21 +193,21 @@ private fun DetailContent(
 
                     DetailAge(age = film.ratingAgeLimits)
 
-                    BoxWithConstraints(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(top = dimensionResource(id = R.dimen.step4))
-                    ) {
-                        Button(
-                            onClick = {},
-                            modifier = Modifier.align(Alignment.BottomCenter),
-                        ) {
-                            Text(
-                                text = stringResource(R.string.detail_button_watch),
-                                style = MaterialTheme.typography.labelMedium
-                            )
-                        }
-                    }
+//                    BoxWithConstraints(
+//                        modifier = Modifier
+//                            .fillMaxSize()
+//                            .padding(top = dimensionResource(id = R.dimen.step4))
+//                    ) {
+//                        Button(
+//                            onClick = {},
+//                            modifier = Modifier.align(Alignment.BottomCenter),
+//                        ) {
+//                            Text(
+//                                text = stringResource(R.string.detail_button_watch),
+//                                style = MaterialTheme.typography.labelMedium
+//                            )
+//                        }
+//                    }
                 }
             }
         }
@@ -218,7 +218,11 @@ private fun DetailContent(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CollapsingToolbar(
-    title: String, scroll: ScrollState, headerHeightPx: Float, toolbarHeightPx: Float
+    title: String,
+    scroll: ScrollState,
+    headerHeightPx: Float,
+    toolbarHeightPx: Float,
+
 ) {
     val toolbarBottom by remember {
         mutableFloatStateOf(headerHeightPx - toolbarHeightPx)
@@ -244,21 +248,21 @@ fun CollapsingToolbar(
                 maxLines = 1,
             )
         }, navigationIcon = {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_back),
-                contentDescription = "back icon in details",
-                modifier = Modifier
-                    .padding(dimensionResource(id = R.dimen.step1))
-                    .size(dimensionResource(id = R.dimen.step7))
-            )
+//            Icon(
+//                painter = painterResource(id = R.drawable.ic_back),
+//                contentDescription = "back icon in details",
+//                modifier = Modifier
+//                    .padding(dimensionResource(id = R.dimen.step1))
+//                    .size(dimensionResource(id = R.dimen.step7))
+//            )
         }, actions = {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_favorite),
-                contentDescription = "favorite icon in details",
-                modifier = Modifier
-                    .padding(dimensionResource(id = R.dimen.step1))
-                    .size(dimensionResource(id = R.dimen.step7))
-            )
+//            Icon(
+//                painter = painterResource(id = R.drawable.ic_favorite),
+//                contentDescription = "favorite icon in details",
+//                modifier = Modifier
+//                    .padding(dimensionResource(id = R.dimen.step1))
+//                    .size(dimensionResource(id = R.dimen.step7))
+//            )
         }, colors = TopAppBarDefaults.mediumTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.surface
         )
@@ -270,27 +274,28 @@ fun CollapsingToolbar(
         exit = fadeOut(animationSpec = tween(NO_TOOLBAR_ANIMATION_TIMING))
     ) {
         TopAppBar(title = {}, navigationIcon = {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_back),
-                contentDescription = "back icon in details",
-                tint = Color.White,
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .background(toolbarBackgroundButton)
-                    .padding(dimensionResource(id = R.dimen.step1))
-                    .size(dimensionResource(id = R.dimen.step7))
-            )
+//            Icon(
+//                painter = painterResource(id = R.drawable.ic_back),
+//                contentDescription = "back icon in details",
+//                tint = Color.White,
+//                modifier = Modifier
+//                    .clip(CircleShape)
+//
+//                    .background(toolbarBackgroundButton)
+//                    .padding(dimensionResource(id = R.dimen.step1))
+//                    .size(dimensionResource(id = R.dimen.step7))
+//            )
         }, actions = {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_favorite),
-                contentDescription = "favorite icon in details",
-                tint = Color.White,
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .background(toolbarBackgroundButton)
-                    .padding(dimensionResource(id = R.dimen.step1))
-                    .size(dimensionResource(id = R.dimen.step7))
-            )
+//            Icon(
+//                painter = painterResource(id = R.drawable.ic_favorite),
+//                contentDescription = "favorite icon in details",
+//                tint = Color.White,
+//                modifier = Modifier
+//                    .clip(CircleShape)
+//                    .background(toolbarBackgroundButton)
+//                    .padding(dimensionResource(id = R.dimen.step1))
+//                    .size(dimensionResource(id = R.dimen.step7))
+//            )
         }, colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = Color.Transparent)
         )
     }

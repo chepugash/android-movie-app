@@ -5,7 +5,7 @@ import com.practice.feature.home_impl.presentation.model.HomePresentationEntity
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
-object HomeEntityToHomePresentationMapper {
+class HomeEntityToHomePresentationMapper {
 
     operator fun invoke(homeEntityList: List<HomeEntity>?): ImmutableList<HomePresentationEntity>? {
         return homeEntityList?.map {

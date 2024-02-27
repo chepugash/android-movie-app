@@ -7,4 +7,12 @@
     <string name="detail_rating_kinopoisk_prefix">Кинопоиск %1$s</string>
     <string name="detail_rating_imdb_prefix">IMDB %1$s</string>
     <string name="detail_button_watch">Смотреть</string>
+
+    <string name="auth_enter_number_message">Введите свой номер для авторизации</string>
+    <string name="auth_btn_continue">Продолжить</string>
+    <string name="auth_welcome_message">Добро пожаловать в Movie</string>
+    <string name="auth_enter_code_message">Введите код из смс</string>
+    <string name="auth_code_was_sent_message">Код был отправлен на номер телефона \n%1$s</string>
+    <string name="auth_sent_code_again_btn">Выслать повторный код</string>
+    <string name="auth_sent_code_again_message">Выслать повторный код (%1$s:%2$s)</string>
 </resources>

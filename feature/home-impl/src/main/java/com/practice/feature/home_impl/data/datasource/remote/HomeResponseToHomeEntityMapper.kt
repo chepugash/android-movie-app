@@ -2,7 +2,7 @@ package com.practice.feature.home_impl.data.datasource.remote
 
 import com.practice.feature.home_api.model.HomeEntity
 
-object HomeResponseToHomeEntityMapper {
+class HomeResponseToHomeEntityMapper {
 
     operator fun invoke(response: HomeResponseEntity): List<HomeEntity>? {
         val list = mutableListOf<HomeEntity>()

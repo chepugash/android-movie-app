@@ -5,4 +5,6 @@ sealed interface HomeEffect {
     class NavigateToDetail(val id: Int) : HomeEffect
 
     object NavigateToProfile : HomeEffect
+
+    object NavigateBack : HomeEffect
 }
